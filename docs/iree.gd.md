@@ -1,4 +1,4 @@
-# IREE.gd User Manual
+# IREE.gd
 
 Time to get started on spicing up your game with machine learning models!
 Before we start, we will first set up IREE.gd in a project.
@@ -38,5 +38,7 @@ After successfully generate the bytecodes, we will need to figure out the input 
 
 ## Using Tensorflow lite model
 In this section, we will be porting a tensorflow lite model called [Enhanced Super Resolution GAN](https://www.kaggle.com/models/kaggle/esrgan-tf2).
+
+
 
 *Coming soon...*
