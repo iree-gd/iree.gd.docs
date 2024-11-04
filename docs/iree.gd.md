@@ -21,7 +21,15 @@ Before proceeding, it would be better to test out whether your IREE.gd is workin
 After download and extract the aformentioned `iree-gd-sample-*.zip`,  open the project with Godot.
 Hopefully, you'll be greeted with a baboon face without any errors.
 
-Just run the baboon scene, press the `upscale` button. If your baboon face becomes much clearer, congratuation, you have successfully run the [Enhanced Super Resolution GAN](https://www.kaggle.com/models/kaggle/esrgan-tf2) model!
+![First time open sample](images/first_time_open_sample.png)
+
+Just run the baboon scene. 
+
+![Low resolution baboon](images/baboon_lowres.png)
+
+Press the `upscale` button. If your baboon face becomes much clearer, congratuation, you have successfully run the [Enhanced Super Resolution GAN](https://www.kaggle.com/models/kaggle/esrgan-tf2) model!
+
+![High resolution baboon](images/baboon_highres.png)
 
 Later on, we will discuss on how the tensorflow lite model is imported into Godot.
 
