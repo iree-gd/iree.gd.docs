@@ -44,9 +44,83 @@ To use a machine learning model with IREE, one would need to turn, or transpile,
 
 After successfully generate the bytecodes, we will need to figure out the input format and output format. In IREE, the input data is in tensor, or multi-dimensional array. The input and output dimension would depends on the model. Later on, we will discuss how to inspect the input and output dimensions. Moreover, the user would need to figure out the meaning of the output, whether interpret as an image, or as a series of attributes. It would also heavily depends on the model. Unfortunately, there is no standard way of represent data, so one would need to figure it out, usually with the help of original example code. In this documentation, we will do our best to demonstrate the process of figuring out the attributes.
 
-## Using Tensorflow lite model
+## Porting machine learning models
+
+Porting machine learning model usually involve 3 steps:
+
+1. Convert machine learning model to MLIR,
+2. Compile MLIR to bytecode, based on the backend,
+3. Write intepretation code to interface with the model.
+
+### Porting Tensorflow lite model
 In this section, we will be porting a tensorflow lite model called [Enhanced Super Resolution GAN](https://www.kaggle.com/models/kaggle/esrgan-tf2).
+This is based on [IREE's guide: Tensorflow Lite integration](https://iree.dev/guides/ml-frameworks/tflite/).
+The flow follows the aformentioned sequence of steps for porting machine learning models.
 
+#### Installation of IREE's tools for porting Tensorflow lite model
+IREE's tools are required for porting tensorflow lite model. 
+They are deployed on python's package manager, pip.
 
+1. Install tensorflow.
+
+```sh
+pip install tensorflow
+```
+
+2. Install IREE's tools
+
+```sh
+pip install iree-compile iree-runtime iree-tools-tflite
+```
+
+If you are using the nightly version (or compile from source with latest IREE.gd commit), you might need to use the nightly version of IREE's tools.
+
+```sh
+pip install \
+  --find-links https://iree.dev/pip-release-links.html \
+  --upgrade \
+  iree-compiler \
+  iree-runtime \
+  iree-tools-tflite
+```
+
+#### Convert Tensorflow lite model to MLIR
+To convert the tensorflow lite model into MLIR format, we'll be using `iree-import-tflite`.
+Assuming the model to be ported as `model.tflite`.
+
+```sh
+iree-import-tflite model.tflite -o model.mlir
+```
+
+#### Compile Tensorflow lite MLIR to bytecode
+Then, we compile the Tensorflow lite MLIR code.
+Since we are compiling MLIR code generated from `iree-import-tflite`, we'll pass in the `--iree-input-type=tosa`.
+We will compile for both Metal and Vulkan backends.
+To target Metal backend (Apple products), we pass in the `--iree-hal-target-backends=metal-spirv` flag.
+
+```sh
+iree-compile --iree-input-type=tosa --iree-hal-target-backends=metal-spirv model.mlir -o model.metal.vmfb
+```
+
+To target Vulkan backend (Windows, Linux, \*BSD, Android), we pass  in the `iree-hal-target-backends=vulkan-spirv` flag.
+
+```sh
+iree-compile --iree-input-type=tosa --iree-hal-target-backends=vulkan-spirv model.mlir -o model.vulkan.vmfb
+```
+
+The `.vmfb` suffix is required to tell IREE.gd to treat it as an IREE bytecode, it stands for virtual machine flatbuffer.
+The `.metal` or `.vulkan` in the middle of the bytecode name is just to aid us to differentiate between bytecode targeting Metal backend or Vulkan backend.
+
+#### Generate the bytecode information dump
+It is a good time to generate the information dump to inspect the bytecode to know the input and output format.
+This step is cruicial for the latter step on writting interpretation code for the machine learning model.
+We will use `iree-dump-module` tool.
+
+```sh
+iree-dump-module model.metal.vmfb > model.metal.dump.log
+iree-dump-module model.vulkan.vmfb > model.vulkan.dump.log
+```
+
+#### Writing Interpretation code
 
 *Coming soon...*
