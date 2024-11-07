@@ -1,9 +1,12 @@
 # IREE.gd
 
 It's time to start spicing up your game with machine-learning models!
-Before we start, we will first set up IREE.gd in a project.
-Then, we cover some concepts so that people who are interested can more easily grasp what is going on when following the tutorial.
-Lastly, we demonstrate using a machine-learning model in Godot via IREE.gd. Unfortunately, there are several machine learning frameworks, such as TensorFlow and PyTorch, in the world of machine learning, with some significant differences among them. Thus, each framework would have a dedicated way of using its model. In this documentation, we cover models from these machine learning frameworks:
+
+1. Before we start, we will first set up IREE.gd in a project.
+2. Then, we covered some concepts so people could grasp what was happening while following the tutorial.
+3. Lastly, we demonstrate using a machine-learning model in Godot via IREE.gd.
+
+Unfortunately, there are several machine learning frameworks, such as TensorFlow and PyTorch, in the world of machine learning, with some significant differences among them. Thus, each framework would have a dedicated way of using its model. In this documentation, we cover models from these machine learning frameworks:
 
 - Tensorflow lite
 
@@ -11,14 +14,16 @@ Lastly, we demonstrate using a machine-learning model in Godot via IREE.gd. Unfo
 To get IREE.gd, go to [the official releases on Github](https://github.com/iree-gd/iree.gd/releases) and fetch a copy of IREE.gd. There are two versions:
 
 - `iree-gd-sample-*.zip` - A Godot project with IREE.gd and several samples to test it out, good for trying out.
-- `iree-gd-*.zip` - Lightweight version consisting of the compiled libraries, suitable for integration into existing project.
+- `iree-gd-*.zip` - A lightweight add-on comprising the compiled libraries suitable for integration into an existing project.
 
-In this documentation, we will use `iree-gd-sample-*.zip` to quickly set up and test whether IREE.gd is working properly.
+In this documentation, we will use `iree-gd-sample-*.zip` to quickly set up and test whether IREE.gd is working correctly.
 
 ### Testing out the samples
 
-Before proceeding, it would be better for you to test whether your IREE.gd is working on your device. 
-After download and extract the aformentioned `iree-gd-sample-*.zip`,  open the project with Godot.
+Before you start, it would be better for you to test whether your IREE.gd is working on your device. 
+
+After downloading and extracting the aforementioned `iree-gd-sample-*.zip,` open the project with Godot.
+
 I hope you'll be greeted with a baboon face without any errors.
 
 ![First time open sample](images/first_time_open_sample.png)
@@ -27,7 +32,7 @@ Just run the baboon scene.
 
 ![Low resolution baboon](images/baboon_lowres.png)
 
-Press the `upscale` button. If your baboon's face becomes much clearer, congratulations—you have successfully run the [Enhanced Super Resolution GAN](https://www.kaggle.com/models/kaggle/esrgan-tf2) model!
+Press the `upscale` button. If your baboon's face becomes much cleaner visually, congratulations—you have successfully run the [Enhanced Super Resolution GAN](https://www.kaggle.com/models/kaggle/esrgan-tf2) model!
 
 ![High resolution baboon](images/baboon_highres.png)
 
@@ -35,7 +40,7 @@ Later, we will discuss how the TensorFlow lite model is imported into Godot.
 
 ## How IREE.gd works
 
-In this section, some technical details are discussed so you have a clearer image of what is going on when you import your own model, hopefully in simpler terms. Some of the details are abstracted away to make things simpler. For further reading, you can visit the [official IREE website](https://iree.dev). It is not mandatory, and you could skip this section for now. 
+This section discusses technical details so you have a clearer image of what happens when you import your model, hopefully in simpler terms. Some of the details are abstracted away to make things simpler. For further reading, you can visit the [official IREE website](https://iree.dev). It is not mandatory, and you could skip this section for now. 
 
 IREE.gd, as the name suggested, is [IREE](https://github.com/iree-org/iree) ported into Godot. IREE is a compiler and runtime library specialized for running machine learning models. It is like the Java compiler and Java virtual machine; the compiler produces bytecodes while the runtime runs the bytecodes. The language would be Java for the Java compiler, while for IREE, the language is MLIR, a language specialized for the compiler to read instead of being user-friendly.
 
@@ -55,8 +60,10 @@ Porting machine learning model usually involves three steps:
 
 ### Porting Tensorflow lite model
 
-In this section, we will port a Tensorflow lite model called [Enhanced Super Resolution GAN](https://www.kaggle.com/models/kaggle/esrgan-tf2).
+This section will port a Tensorflow lite model called [Enhanced Super Resolution GAN](https://www.kaggle.com/models/kaggle/esrgan-tf2).
+
 This is based on [IREE's guide: Tensorflow Lite integration](https://iree.dev/guides/ml-frameworks/tflite/).
+
 The flow follows the sequence mentioned above of steps for porting machine learning models.
 
 #### Installation of IREE's tools for porting the Tensorflow lite model
@@ -113,10 +120,12 @@ iree-compile --iree-input-type=tosa --iree-hal-target-backends=vulkan-spirv mode
 ```
 
 The `.vmfb` suffix tells IREE.gd to treat it as IREE bytecode; it stands for virtual machine flat buffer.
-The `.metal` or `.vulkan` in the middle of the bytecode name is just to help us differentiate between bytecode targeting a Metal or Vulkan backend.
+The `.metal` or `.vulkan` in the middle of the bytecode name helps us differentiate between bytecode targeting a Metal or Vulkan backend.
 
 #### Generate the bytecode information dump
-It is a good time to generate the information dump and inspect the bytecode to determine the input and output formats.
+
+Now is an excellent time to generate the information dump and inspect the bytecode to determine the input and output formats.
+
 This step is crucial for the latter step of writing interfacing code for the machine learning model.
 We will use `iree-dump-module` tool.
 
@@ -127,7 +136,7 @@ iree-dump-module model.vulkan.vmfb > model.vulkan.dump.log
 
 #### Inspecting the bytecode information dump
 
-Let's inspect the bytecode information dump to find the exported functions that could be called by IREE.gd. 
+Let's inspect the bytecode information dump to find the exported functions that IREE.gd could call. 
 
 We'll only need to inspect one of the information dumps, as both would have the same exported functions, albeit with different backends.
 
@@ -173,7 +182,7 @@ func upscale(p_image: Image) -> Image:
 	assert(p_image.get_width() == 50) # Although it can only be 50x50, you can always slice larger images into smaller ones and pad smaller images to ensure they are 50x50.
 	assert(p_image.get_height() == 50)
 
-    # Make sure the image is in RGB channel with 8-bit unsigned integer.
+    # Ensure the image is in an RGB channel with an 8-bit unsigned integer.
 	p_image.convert(Image.FORMAT_RGB8)
 
     # Get the data and convert it to 32-bit floats.
@@ -186,7 +195,7 @@ func upscale(p_image: Image) -> Image:
 	var input_tensor := IREETensor.from_float32s(float32_data, [1, 50, 50, 3])
 
     # Call the module and get the output tensor
-	var output_tensors := module.call_module("module.main", [input_tensor]) # The entry point is always "module.main". It is synchronous, so it could be slow and blocking the main thread, you could use `Thread` to run in another thread to not jam the game.
+	var output_tensors := module.call_module("module.main", [input_tensor]) # The entry point is always "module.main". It is synchronous, so it could be slow and block the main thread; you could use `Thread` to run in another thread so as not to jam the game.
 	if output_tensors.is_empty(): push_error("No result")
 	var output_tensor := output_tensors[0]
 
