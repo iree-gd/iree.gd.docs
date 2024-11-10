@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>IREE.gd - IREE.gd Documentation</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">IREE.gd Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">IREE.gd</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#ireegd" class="nav-link">IREE.gd</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#getting-started" class="nav-link">Getting started</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#how-ireegd-works" class="nav-link">How IREE.gd works</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#porting-machine-learning-models" class="nav-link">Porting machine learning models</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="ireegd">IREE.gd</h1>
+<p>It's time to start spicing up your game with machine-learning models!</p>
+<ol>
+<li>Before we start, we will first set up IREE.gd in a project.</li>
+<li>Then, we covered some concepts so people could grasp what was happening while following the tutorial.</li>
+<li>Lastly, we demonstrate using a machine-learning model in Godot via IREE.gd.</li>
+</ol>
+<p>Unfortunately, there are several machine learning frameworks, such as TensorFlow and PyTorch, in the world of machine learning, with some significant differences among them. Thus, each framework would have a dedicated way of using its model. In this documentation, we cover models from these machine learning frameworks:</p>
+<ul>
+<li>Tensorflow lite</li>
+</ul>
+<h2 id="getting-started">Getting started</h2>
+<p>To get IREE.gd, go to <a href="https://github.com/iree-gd/iree.gd/releases">the official releases on Github</a> and fetch a copy of IREE.gd. There are two versions:</p>
+<ul>
+<li><code>iree-gd-sample-*.zip</code> - A Godot project with IREE.gd and several samples to test it out, good for trying out.</li>
+<li><code>iree-gd-*.zip</code> - A lightweight add-on comprising the compiled libraries suitable for integration into an existing project.</li>
+</ul>
+<p>In this documentation, we will use <code>iree-gd-sample-*.zip</code> to quickly set up and test whether IREE.gd is working correctly.</p>
+<h3 id="testing-out-the-samples">Testing out the samples</h3>
+<p>Before you start, it would be better for you to test whether your IREE.gd is working on your device. </p>
+<p>After downloading and extracting the aforementioned <code>iree-gd-sample-*.zip,</code> open the project with Godot.</p>
+<p>I hope you'll be greeted with a baboon face without any errors.</p>
+<p><img alt="First time open sample" src="../images/first_time_open_sample.png" /></p>
+<p>Just run the baboon scene. </p>
+<p><img alt="Low resolution baboon" src="../images/baboon_lowres.png" /></p>
+<p>Press the <code>upscale</code> button. If your baboon's face becomes much cleaner visually, congratulations—you have successfully run the <a href="https://www.kaggle.com/models/kaggle/esrgan-tf2">Enhanced Super Resolution GAN</a> model!</p>
+<p><img alt="High resolution baboon" src="../images/baboon_highres.png" /></p>
+<p>Later, we will discuss how the TensorFlow lite model is imported into Godot.</p>
+<h2 id="how-ireegd-works">How IREE.gd works</h2>
+<p>This section discusses technical details so you have a clearer image of what happens when you import your model, hopefully in simpler terms. Some of the details are abstracted away to make things simpler. For further reading, you can visit the <a href="https://iree.dev">official IREE website</a>. It is not mandatory, and you could skip this section for now. </p>
+<p>IREE.gd, as the name suggested, is <a href="https://github.com/iree-org/iree">IREE</a> ported into Godot. IREE is a compiler and runtime library specialized for running machine learning models. It is like the Java compiler and Java virtual machine; the compiler produces bytecodes while the runtime runs the bytecodes. The language would be Java for the Java compiler, while for IREE, the language is MLIR, a language specialized for the compiler to read instead of being user-friendly.</p>
+<p>For the runtime, instead of having something like <code>System.out.println</code> in Java to interact with the user, the IREE runtime is specialized for interacting with the CPU or GPU and making crazy fast accelerated linear algebra (which most machine learning models need).</p>
+<p>To use a machine learning model with IREE, one would need to turn or transpile the model into MLIR code that uses a library (CPU or GPU functions) supported by the runtime. The library supported by the runtime depends on the application for IREE.gd, there is Metal for Apple products, Vulkan for Windows, Unix-like and Android, and VMVX for the rest. So, later on, you'll need to make your model target the platform your game will be on (having both Metal and Vulkan will support most of the platforms). For turning the model into MLIR code, there are different tools for different machine learning frameworks, as each has its format for storing the machine learning model <a href="https://xkcd.com/927/">too bad there is no standardized format for it</a>. Thus, each machine-learning framework has different ways of porting the models.</p>
+<p>After successfully generating the bytecodes, we must figure out the input and output formats. In IREE, the input data is in a tensor or multi-dimensional array. The input and output dimensions would depend on the model. Later, we will look over the input and output dimensions. Moreover, the user would need to figure out the meaning of the output, whether interpreted as an image or as a series of attributes. It would also heavily depend on the model. Unfortunately, there is no standard way of representing data, so one would need to figure it out, usually with the help of the original example code. In this documentation, we will do our best to demonstrate the process of figuring out the attributes.</p>
+<h2 id="porting-machine-learning-models">Porting machine learning models</h2>
+<p>Porting machine learning model usually involves three steps:</p>
+<ol>
+<li>Convert the machine learning model to MLIR,</li>
+<li>Compile MLIR to bytecode based on the backend,</li>
+<li>Write interfacing code to interface with the model.</li>
+</ol>
+<h3 id="porting-tensorflow-lite-model">Porting Tensorflow lite model</h3>
+<p>This section will port a Tensorflow lite model called <a href="https://www.kaggle.com/models/kaggle/esrgan-tf2">Enhanced Super Resolution GAN</a>.</p>
+<p>This is based on <a href="https://iree.dev/guides/ml-frameworks/tflite/">IREE's guide: Tensorflow Lite integration</a>.</p>
+<p>The flow follows the sequence mentioned above of steps for porting machine learning models.</p>
+<h4 id="installation-of-irees-tools-for-porting-the-tensorflow-lite-model">Installation of IREE's tools for porting the Tensorflow lite model</h4>
+<p>IREE's tools are required to port the TensorFlow lite model. 
+They are deployed to Python's package manager, pip.</p>
+<ol>
+<li>Install TensorFlow.</li>
+</ol>
+<pre><code class="language-sh">pip install tensorflow
+</code></pre>
+<ol>
+<li>Install IREE's tools</li>
+</ol>
+<pre><code class="language-sh">pip install iree-compile iree-runtime iree-tools-tflite
+</code></pre>
+<p>If you are using the nightly version (or compiling from source with the latest IREE.gd commit), you should use the nightly version of IREE's tools.</p>
+<pre><code class="language-sh">pip install \
+  --find-links https://iree.dev/pip-release-links.html \
+  --upgrade \
+  iree-compiler \
+  iree-runtime \
+  iree-tools-tflite
+</code></pre>
+<h4 id="convert-tensorflow-lite-model-to-mlir">Convert Tensorflow lite model to MLIR</h4>
+<p>To convert the TensorFlow lite model into MLIR format, we'll be using <code>iree-import-tflite</code>.
+Assuming the model to be ported as <code>model.tflite</code>.</p>
+<pre><code class="language-sh">iree-import-tflite model.tflite -o model.mlir
+</code></pre>
+<h4 id="compile-tensorflow-lite-mlir-to-bytecode">Compile Tensorflow lite MLIR to bytecode</h4>
+<p>Then, we compile the Tensorflow lite MLIR code.
+Since we are compiling MLIR code generated from <code>iree-import-tflite</code>, we'll pass in the <code>--iree-input-type=tosa</code>.
+We will compile for both Metal and Vulkan backends.
+To target the Metal backend (Apple products), we pass in the <code>--iree-hal-target-backends=metal-spirv</code> flag.</p>
+<pre><code class="language-sh">iree-compile --iree-input-type=tosa --iree-hal-target-backends=metal-spirv model.mlir -o model.metal.vmfb
+</code></pre>
+<p>To target Vulkan backend (Windows, Linux, *BSD, Android), we pass  in the <code>iree-hal-target-backends=vulkan-spirv</code> flag.</p>
+<pre><code class="language-sh">iree-compile --iree-input-type=tosa --iree-hal-target-backends=vulkan-spirv model.mlir -o model.vulkan.vmfb
+</code></pre>
+<p>The <code>.vmfb</code> suffix tells IREE.gd to treat it as IREE bytecode; it stands for virtual machine flat buffer.
+The <code>.metal</code> or <code>.vulkan</code> in the middle of the bytecode name helps us differentiate between bytecode targeting a Metal or Vulkan backend.</p>
+<h4 id="generate-the-bytecode-information-dump">Generate the bytecode information dump</h4>
+<p>Now is an excellent time to generate the information dump and inspect the bytecode to determine the input and output formats.</p>
+<p>This step is crucial for the latter step of writing interfacing code for the machine learning model.
+We will use <code>iree-dump-module</code> tool.</p>
+<pre><code class="language-sh">iree-dump-module model.metal.vmfb &gt; model.metal.dump.log
+iree-dump-module model.vulkan.vmfb &gt; model.vulkan.dump.log
+</code></pre>
+<h4 id="inspecting-the-bytecode-information-dump">Inspecting the bytecode information dump</h4>
+<p>Let's inspect the bytecode information dump to find the exported functions that IREE.gd could call. </p>
+<p>We'll only need to inspect one of the information dumps, as both would have the same exported functions, albeit with different backends.</p>
+<p>The identifier we are looking for is the <code>@main</code>, the default main entry point generated by <code>iree-compile</code>.</p>
+<p>After searching for the identifier, you can find it under the exported functions section.</p>
+<pre><code>Exported Functions:
+  [  0] main(!vm.ref&lt;?&gt;) -&gt; (!vm.ref&lt;?&gt;)
+        iree.abi.declaration: sync func @main(%input0: tensor&lt;1x50x50x3xf32&gt; {ml_program.identifier = &quot;input_0&quot;}) -&gt; (%output0: tensor&lt;1x200x200x3xf32&gt; {ml_program.identifier = &quot;Identity&quot;})
+  [  1] __init() -&gt; ()
+</code></pre>
+<p>Here, the <code>%input</code> would be the input parameter and <code>%output</code> is the returned output. The <code>tensor</code> type after the colon (<code>:</code>) would be the type, or format, of the input.
+The <code>%input</code> type is <code>tensor&lt;1x50x50x3xf32&gt;</code> while the <code>%output</code> type is <code>tensor&lt;1x200x200x3xf32&gt;</code>.
+<code>f32</code> is a 32-bit float. 
+So <code>%input</code> would be a 4th dimension 32 bit float array with the shape of <code>[1, 50, 50, 3]</code> while <code>%output</code> would be a 4th dimension 32 bit float array with the shape of <code>[1, 200, 200, 3]</code>.</p>
+<p>We cross-reference the input with the documentation on <a href="https://www.kaggle.com/models/kaggle/esrgan-tf2">ESRGan</a> website.</p>
+<blockquote>
+<p><strong>NOTE</strong></p>
+<ul>
+<li>The image must be a float32 image, converted using <code>tf.cast(image, tf.float32)</code>.</li>
+<li>The image must be of 4 dimensions, <code>[batch_size, height, width, 3]</code>. To perform super-resolution on a single image, use <code>tf.expand_dims(image, 0)</code> to add the batch dimension.</li>
+<li>To display the image, don't forget to convert back to uint8 using <code>tf.cast(tf.clip_by_value(image[index_of_image_to_display], 0, 255), tf.uint8)</code></li>
+</ul>
+</blockquote>
+<p>So, we could confirm that it takes the data in 32-bit float and outputs 32-bit float data.
+From the dimension specification, we know that in the shape of the input tensor, <code>1</code> is the batch size, <code>50</code> is the width and height, and 3 is probably the Red, Green, and Blue channels.
+The output tensor would have the batch size as <code>1</code>, the width and height as <code>200</code>, and each pixel having a red, green, and blue channel.</p>
+<h4 id="using-the-model-in-godot">Using the model in Godot</h4>
+<p>So, we can finally write some code to use the Tensorflow lite model.</p>
+<p>Here is a straightforward interfacing code.</p>
+<pre><code class="language-swift">var module : IREEModule = preload(&quot;res://path/to/model.vulkan.vmfb&quot;) # Remember to use the correct bytecode following the supported backend. You can always use `OS.name` to see the current platform and infer the correct bytecode.
+
+func upscale(p_image: Image) -&gt; Image:
+    # Make sure the input image has the expected width and height.
+    assert(p_image.get_width() == 50) # Although it can only be 50x50, you can always slice larger images into smaller ones and pad smaller images to ensure they are 50x50.
+    assert(p_image.get_height() == 50)
+
+    # Ensure the image is in an RGB channel with an 8-bit unsigned integer.
+    p_image.convert(Image.FORMAT_RGB8)
+
+    # Get the data and convert it to 32-bit floats.
+    var uint8_data := p_image.get_data()
+    var float32_data : PackedFloat32Array
+    for datum in uint8_data:
+        float32_data.append(float(datum))
+
+    # Define the input tensor and its dimensions.
+    var input_tensor := IREETensor.from_float32s(float32_data, [1, 50, 50, 3])
+
+    # Call the module and get the output tensor
+    var output_tensors := module.call_module(&quot;module.main&quot;, [input_tensor]) # The entry point is always &quot;module.main&quot;. It is synchronous, so it could be slow and block the main thread; you could use `Thread` to run in another thread so as not to jam the game.
+    if output_tensors.is_empty(): push_error(&quot;No result&quot;)
+    var output_tensor := output_tensors[0]
+
+    # Convert it from 32-bit floats back to the image.
+    var float32_output_data := output_tensor.get_data().to_float32_array()
+    var uint8_output_data : PackedByteArray
+    for datum in float32_output_data:
+        uint8_output_data.append(int(datum))
+    return Image.create_from_data(200, 200, false, Image.FORMAT_RGB8, uint8_output_data) 
+</code></pre>
+<p>This code would take in a 50x50 image and output a 200x200 image.</p>
+<p>You can use this interfacing code to make high-resolution images with ESRGan!</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
