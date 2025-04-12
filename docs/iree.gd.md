@@ -74,13 +74,13 @@ They are deployed to Python's package manager, pip.
 1. Install TensorFlow.
 
 ```sh
-pip install tensorflow
+pip install "tensorflow<=2.18.0"
 ```
 
 2. Install IREE's tools
 
 ```sh
-pip install iree-compile iree-runtime iree-tools-tflite
+pip install iree-compiler iree-runtime iree-tools-tflite
 ```
 
 If you are using the nightly version (or compiling from source with the latest IREE.gd commit), you should use the nightly version of IREE's tools.
