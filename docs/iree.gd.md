@@ -74,7 +74,7 @@ They are deployed to Python's package manager, pip.
 1. Install TensorFlow.
 
 ```sh
-pip install tensorflow
+pip install "tensorflow<=2.18.0"
 ```
 
 2. Install IREE's tools
