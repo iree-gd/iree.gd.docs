@@ -1,4 +1,4 @@
-# IREE.gd
+# Tensorflow Lite with IREE.gd
 
 It's time to start spicing up your game with machine-learning models!
 
@@ -6,9 +6,7 @@ It's time to start spicing up your game with machine-learning models!
 2. Then, we covered some concepts so people could grasp what was happening while following the tutorial.
 3. Lastly, we demonstrate using a machine-learning model in Godot via IREE.gd.
 
-Unfortunately, there are several machine learning frameworks, such as TensorFlow and PyTorch, in the world of machine learning, with some significant differences among them. Thus, each framework would have a dedicated way of using its model. In this documentation, we cover models from these machine learning frameworks:
-
-- Tensorflow lite
+In this document, we will be focus on porting machine-learning models from Tensorflow Lite machine-learning framework.
 
 ## Getting started
 To get IREE.gd, go to [the official releases on Github](https://github.com/iree-gd/iree.gd/releases) and fetch a copy of IREE.gd. There are two versions:
@@ -80,18 +78,9 @@ pip install "tensorflow<=2.18.0"
 2. Install IREE's tools
 
 ```sh
-pip install iree-compiler iree-runtime iree-tools-tflite
-```
-
-If you are using the nightly version (or compiling from source with the latest IREE.gd commit), you should use the nightly version of IREE's tools.
-
-```sh
 pip install \
-  --find-links https://iree.dev/pip-release-links.html \
-  --upgrade \
-  iree-compiler \
-  iree-runtime \
-  iree-tools-tflite
+    "iree-compiler=20240828.999" \
+    "iree-tools-tflite==20240226.813"
 ```
 
 #### Convert Tensorflow lite model to MLIR
