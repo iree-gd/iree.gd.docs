@@ -15,6 +15,7 @@ Below are the supported platforms with their corresponding backend.
 | ----- | ----- |
 | MacOS, iOS | Metal |
 | Windows, Linux, \*BSDs, Android | Vulkan |
+| The rest | VMVX |
 
 For the Metal backend, IREE.gd only supports the Apple platform with Apple silicon.
 

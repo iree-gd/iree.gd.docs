@@ -1,4 +1,4 @@
 site_name: IREE.gd Documentation
 nav:
   - Home: index.md
-  - IREE.gd: iree.gd.md
+  - TFLite: tflite.md
