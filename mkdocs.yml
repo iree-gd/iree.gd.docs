@@ -2,3 +2,5 @@ site_name: IREE.gd Documentation
 nav:
   - Home: index.md
   - TFLite: tflite.md
+markdown_extensions:
+  - admonition

@@ -69,6 +69,10 @@ The flow follows the sequence mentioned above of steps for porting machine learn
 IREE's tools are required to port the TensorFlow lite model. 
 They are deployed to Python's package manager, pip.
 
+!!! warning
+    Python 3.11 (or older) is required. Read [the issue](https://github.com/iree-gd/iree.gd/issues/115).
+
+
 1. Install TensorFlow.
 
 ```sh
